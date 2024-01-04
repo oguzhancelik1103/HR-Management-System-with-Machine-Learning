@@ -1,0 +1,31 @@
+﻿@using EntityLayer.Concrete.People
+
+@model Person
+
+@{
+    ViewData["Title"] = "Add Person";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+
+<h1>Add new person</h1>
+<br />
+@using (Html.BeginForm("AddPerson", "Person", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Person Adı")
+        @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.Name)
+        <br /> <br />
+        @Html.Label("Type ID")
+        @Html.TextBoxFor(x => x.PersonTypeID, new {@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.PersonTypeID)
+        <br /> <br />
+        @Html.Label("Fin ID")
+        @Html.TextBoxFor(x => x.PersonFingerID, new {@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.PersonFingerID)
+        <br />
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+
+}

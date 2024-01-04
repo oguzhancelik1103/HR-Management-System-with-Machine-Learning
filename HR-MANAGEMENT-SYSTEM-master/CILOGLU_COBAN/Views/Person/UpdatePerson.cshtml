@@ -1,0 +1,207 @@
+﻿@using EntityLayer.Models
+
+@model PersonModel
+
+@{
+    ViewData["Title"] = "Update Person";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+<style>
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<div class="row">
+    <div class="col-12">
+        <h1>İnsan Kaynakları / Personel Düzenle</h1>
+        <a href="~/Person/Index" class="btn btn-info">Geri</a>
+    </div>
+</div>
+<p>
+    kullanici bilgileri isim vs
+</p>
+
+<div class="tab">
+    <button class="tablinks active" onclick="openTab(event, '1')">Ana Bilgiler</button>
+    <button class="tablinks" onclick="openTab(event, '2')">Kullanıcı Bilgileri</button>
+    <button class="tablinks" onclick="openTab(event, '3')">Kimlik Bilgileri</button>
+    <button class="tablinks" onclick="openTab(event, '4')">Kişisel Bilgiler</button>
+    <button class="tablinks" onclick="openTab(event, '5')">Pasaport Bilgileri</button>
+    <button class="tablinks" onclick="openTab(event, '6')">İletişim Bilgileri</button>
+    <button class="tablinks" onclick="openTab(event, '7')">Eğitim Bilgileri</button>
+    <button class="tablinks" onclick="openTab(event, '8')">Dosya Bilgileri</button>
+</div>
+
+@using (Html.BeginForm("UpdatePerson", "Person", FormMethod.Post))
+{
+    <div id="1" class="tabcontent" style="display: block">
+        <div class="row">
+            <div class="ml-2 mr-2 form-group" style="width:250px">
+                @Html.Label("Adı Soyadı");
+                @Html.TextBoxFor(m => m.Person.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Person.Name)
+            </div>
+            <div class="ml-2 mr-2 form-group" style="width:200px">
+                @Html.Label("Tip")
+                @Html.DropDownListFor(m => m.Person.PersonTypeID, (List<SelectListItem>)ViewBag.pvt, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Person.PersonTypeID)
+            </div>
+            <div class="ml-2 mr-2 form-group" style="width:200px">
+                @Html.Label("Şirket")
+                @Html.DropDownListFor(m => m.PersonCard.SysCompanyID, (List<SelectListItem>)ViewBag.pvc, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.PersonCard.SysCompanyID)
+            </div>
+        </div>
+        <div class="row">
+            <div class="ml-2 mr-2 form-group" style="width:250px">
+                @Html.Label("Pozisyon");
+                @Html.DropDownListFor(m => m.Person.SysPositions, (List<SelectListItem>)ViewBag.pvp, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Person.SysPositions)
+            </div>
+            <div class="ml-2 mr-2 form-group" style="width:200px">
+                @Html.Label("Giriş Tarihi")
+                @Html.TextBoxFor(x => x.PersonCard.EnteredAt, new { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.PersonCard.EnteredAt)
+            </div>
+            <div class="ml-2 mr-2 form-group" style="width:200px">
+                @Html.Label("Çıkış Tarihi")
+                @Html.TextBoxFor(x => x.PersonCard.ExitedAt, new { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.PersonCard.ExitedAt)
+            </div>
+        </div>
+        <div class="row">
+            <div class="ml-2 mr-2 form-group">
+                @Html.Label("Departman Bağlantıları");
+                <br>
+                <button href="~/#" style="width:200px" type="submit" class="btn btn-outline-info">Düzenle</button>
+            </div>
+            <div class="ml-2 mr-2 form-group">
+                @Html.Label("Çalışma Takvimleri")
+                <br>
+                <button href="~/#" style="width:200px" type="submit" class="btn btn-outline-info">Düzenle</button>
+            </div>
+            <div class="ml-2 mr-2 form-group">
+                @Html.Label("Lobi Dashboard")
+                <br>
+                <button href="~/#" style="width:200px" type="submit" class="btn btn-outline-info">Düzenle</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="alert alert-primary" role="alert">
+                Departman :
+            </div>
+        </div>
+    </div>
+
+    <div id="2" class="tabcontent">
+        <div class="row">
+            <div class="ml-2 mr-2 form-group">
+                @Html.Label("Kullanıcı Adı");
+                @Html.TextBoxFor(x => x.SysUser.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.SysUser.Username)
+            </div>
+            <div class="ml-2 mr-2 form-group">
+                @Html.Label("Parola")
+                @Html.TextBoxFor(x => x.SysUser.Password, new { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.SysUser.Password)
+            </div>
+        </div>
+    </div>
+
+    <div id="3" class="tabcontent">
+        <h1>3</h1>
+    </div>
+
+    <div id="4" class="tabcontent">
+        <h1>4</h1>
+    </div>
+
+    <div id="5" class="tabcontent">
+        <h1>5</h1>
+    </div>
+
+    <div id="6" class="tabcontent">
+        <h1>6</h1>
+    </div>
+
+    <div id="7" class="tabcontent">
+        <h1>7</h1>
+    </div>
+
+    <div id="8" class="tabcontent">
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group list-group-flush" id="file_list">
+                    <li class="list-group-item active" style="display: flex;justify-content: space-between;align-items: baseline;">
+                        <span>Personel Dosyaları</span>
+                        <i class="fa fa-plus selectable-icon" data-toggle="modal"></i>
+                    </li>
+                    <li class="list-group-item file_item">
+                        <span>Personel Kimlik </span>
+                        <span>
+                            <i class="far fa-file-image selectable-icon file_event" data-type="image"></i>
+                            <i class="fa fa-times selectable-icon file_event" data-type="remove"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="submit" style="width:200px" class="btn btn-success">Kaydet</button>
+        <button type="reset" style="width:200px" class=" btn btn-danger">İptal</button>
+    </div>
+}

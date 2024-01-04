@@ -1,0 +1,73 @@
+﻿@using EntityLayer.Concrete.People
+
+@model Person
+
+@{
+    ViewData["Title"] = "DetailPerson";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Main content -->
+        @using (Html.BeginForm("DetailPerson", "Person", FormMethod.Post))
+        {
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Personel Düzenleme Sayfası</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    @Html.Label("Person ID");
+                                    @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @disabled="true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Person Name");
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @disabled="true" })
+                                    @Html.ValidationMessageFor(x => x.Name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Person Status")
+                                    @Html.TextBoxFor(x => x.Status, new { @class = "form-control", @disabled="true" })
+                                    @Html.ValidationMessageFor(x => x.Status)
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Person Type")
+                                    @Html.TextBoxFor(x => x.PersonTypeID, new { @class = "form-control", @disabled="true" })
+                                    @Html.ValidationMessageFor(x => x.PersonTypeID)
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Person Finger")
+                                    @Html.TextBoxFor(x => x.PersonFingerID, new { @class = "form-control", @disabled="true" })
+                                    @Html.ValidationMessageFor(x => x.PersonFingerID)
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Person Sync")
+                                    @Html.TextBoxFor(x => x.SyncID, new { @class = "form-control", @disabled="true" })
+                                    @Html.ValidationMessageFor(x => x.SyncID)
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="~/Person/Index" class="btn btn-outline-danger">Geri</a>
+                    </div>
+                </div>
+            </section>
+        }
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</div>
